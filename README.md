@@ -3,7 +3,7 @@
 Cyber Security Analyst | OSINT Specialist  | Threat Investigator
 
 ## Portfolio
-https://hamza-ashraf60.github.io/
+https://itrixiant.github.io/
 
 ## Skills
 - OSINT (Open Source Intelligence)
