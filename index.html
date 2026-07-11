@@ -907,7 +907,7 @@ nav a.nav-active::after{width:100%;}
 </div>
 </div>
 
-<!-- CONTACT -->
+<!-- CONTACT
 <div id="contact" class="sec" style="border-top:1px solid var(--border)">
 <div class="si">
   <div class="ct-wrap">
@@ -928,6 +928,92 @@ nav a.nav-active::after{width:100%;}
   </div>
 </div>
 </div>
+-->
+
+  
+<!-- CONTACT -->
+<div id="contact" class="sec" style="border-top:1px solid var(--border)">
+<div class="si">
+  <div class="ct-wrap">
+    <div>
+      <div class="stag">Contact</div>
+      <div class="ct-head">Let's<br>work together.</div>
+      <p class="ct-sub">Open to intelligence, OSINT, and cyber security roles across Europe — and available for independent exposure, due diligence, and security assessment engagements.</p>
+      <a href="#msg-form" class="btn">Send a Message</a>
+    </div>
+    <div class="ct-rows">
+      <div class="ct-row"><div class="ct-lbl">Email</div><a href="mailto:trixiant@proton.me" class="ct-val">trixiant@proton.me</a></div>
+      <div class="ct-row"><div class="ct-lbl">LinkedIn</div><a href="https://www.linkedin.com/in/hamza-ashraf60/" target="_blank" class="ct-val">linkedin.com/in/hamza-ashraf60</a></div>
+      <div class="ct-row"><div class="ct-lbl">GitHub</div><a href="https://github.com/itrixiant" target="_blank" class="ct-val">github.com/itrixiant</a></div>
+      <div class="ct-row"><div class="ct-lbl">Location</div><div class="ct-val">Islamabad, Pakistan · Relocating to Luxembourg · Q4 2026</div></div>
+      <div class="ct-row"><div class="ct-lbl">Languages</div><div class="ct-val">Urdu (Native) · English C1 · French A1</div></div>
+      <div class="ct-row"><div class="ct-lbl">Availability</div><div class="ct-val">Open to opportunities (EU · Luxembourg especially)<span class="ct-avail-sub">Q4 2026 arrival · Right to work immediately</span></div></div>
+    </div>
+  </div>
+
+  <div class="ct-form" id="msg-form">
+    <div class="ct-form-tag">// SEND A MESSAGE</div>
+    <div class="cf-legend">
+      <span><strong>Exposure</strong> — what's public about you</span>
+      <span><strong>Diligence</strong> — vet a partner, vendor, or hire</span>
+      <span><strong>Security</strong> — pentest your web app, network, or infra</span>
+    </div>
+    <form id="contactForm">
+      <div class="cf-row">
+        <label>What's this about?</label>
+        <select id="cf-topic" required>
+          <option value="">Select one…</option>
+          <option value="Role / Opportunity">Role / Opportunity (EU · Luxembourg)</option>
+          <option value="Digital Exposure Report">Engagement — Digital Exposure Report</option>
+          <option value="Partner & Vendor Due Diligence">Engagement — Partner & Vendor Due Diligence</option>
+          <option value="Security Assessment & Penetration Testing">Engagement — Security Assessment & Penetration Testing</option>
+          <option value="Other">Other / Just reaching out</option>
+        </select>
+      </div>
+      <div class="cf-2col">
+        <div class="cf-row"><label>Name</label><input type="text" id="cf-name" required></div>
+        <div class="cf-row"><label>Email</label><input type="email" id="cf-email" required></div>
+      </div>
+      <div class="cf-row"><label>Message</label><textarea id="cf-message" placeholder="A few lines on what you need." required></textarea></div>
+      <button type="submit" class="btn btnp">Send Message</button>
+      <div class="cf-note">Opens your email client with this pre-filled. Engagement inquiries are scoped under a written agreement before work begins.</div>
+    </form>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ── CONTACT FORM SUBMIT ──────────────────────────────────────────────────
+const cForm = document.getElementById('contactForm');
+if(cForm){
+  cForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const topic = document.getElementById('cf-topic').value;
+    const name = document.getElementById('cf-name').value;
+    const email = document.getElementById('cf-email').value;
+    const message = document.getElementById('cf-message').value;
+    const subject = 'Portfolio Contact — ' + topic;
+    const body = 'Topic: ' + topic + '\nName: ' + name + '\nEmail: ' + email + '\n\n' + message;
+    window.location.href = 'mailto:trixiant@proton.me?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+}
+/* ── CONTACT FORM (inline, service select built in) ─────────── */
+.ct-form{margin-top:56px;padding-top:44px;border-top:1px solid var(--border);}
+.ct-form-tag{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:3px;margin-bottom:18px;}
+.cf-legend{display:flex;flex-wrap:wrap;gap:20px;font-family:var(--body);font-size:13px;color:var(--muted);font-style:italic;margin-bottom:20px;}
+.cf-legend strong{color:var(--accent);font-style:normal;}
+.cf-row{margin-bottom:18px;}
+.cf-row label{font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;display:block;}
+.cf-row input,.cf-row select,.cf-row textarea{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--bright);font-family:var(--body);font-size:15px;padding:11px 13px;transition:border-color .2s;}
+.cf-row input:focus,.cf-row select:focus,.cf-row textarea:focus{outline:none;border-color:var(--accent);}
+.cf-row select{cursor:pointer;font-family:var(--mono);font-size:12px;}
+.cf-row textarea{resize:vertical;min-height:110px;}
+.cf-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:640px){.cf-2col{grid-template-columns:1fr;}}
+.cf-note{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:12px;line-height:1.7;}
+  
+
 
 <footer>
   <div class="foot">HAMZA ASHRAF // INTELLIGENCE & CYBER SECURITY // <span id="fyear"></span></div>
@@ -947,6 +1033,7 @@ const lines=[
   {c:'cm', s:'> LOADING OPERATOR PROFILE...'},
   {c:'cm', s:''},
   {c:'cb', s:'  OPERATOR        : HAMZA ASHRAF'},
+  {c:'cb', s:'  CODENAME        : TRIXIANT'},
   {c:'cb', s:'  DESIGNATION     : INTELLIGENCE & CYBER SECURITY SPECIALIST'},
   {c:'cb', s:'  STATUS          : ACTIVE'},
   {c:'ca', s:'  CLEARANCE       : OPERATIONAL'},
