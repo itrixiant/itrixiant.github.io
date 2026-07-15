@@ -1312,12 +1312,6 @@ if(ctForm){
 
   ctForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    if(ctForm.action.includes('YOUR_FORM_ID')){
-      showCtMessage('Form is not connected yet — the Formspree ID in the action URL is still the placeholder.', true);
-      return;
-    }
-
     ctBtn.disabled = true;
     ctBtn.textContent = 'Sending...';
     ctSuccess.classList.remove('show');
