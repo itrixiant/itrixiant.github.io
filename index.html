@@ -1300,8 +1300,24 @@ if(ctForm){
   const ctBtn = ctForm.querySelector('.ctf-submit');
   const ctSuccess = document.getElementById('ctfSuccess');
   const ctBtnLabel = ctBtn.textContent;
+  const ctDefaultMsg = ctSuccess.textContent;
+
+  function showCtMessage(msg, isError){
+    ctSuccess.textContent = msg;
+    ctSuccess.style.color = isError ? '#FF3050' : '';
+    ctSuccess.style.borderColor = isError ? 'rgba(255,48,80,.3)' : '';
+    ctSuccess.style.background = isError ? 'rgba(255,48,80,.06)' : '';
+    ctSuccess.classList.add('show');
+  }
+
   ctForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    if(ctForm.action.includes('YOUR_FORM_ID')){
+      showCtMessage('Form is not connected yet — the Formspree ID in the action URL is still the placeholder.', true);
+      return;
+    }
+
     ctBtn.disabled = true;
     ctBtn.textContent = 'Sending...';
     ctSuccess.classList.remove('show');
@@ -1313,14 +1329,21 @@ if(ctForm){
       });
       if(res.ok){
         ctForm.reset();
-        ctSuccess.classList.add('show');
+        showCtMessage(ctDefaultMsg, false);
       } else {
-        ctBtn.textContent = 'Error — try again';
-        setTimeout(()=>{ ctBtn.textContent = ctBtnLabel; }, 2200);
+        let detail = 'submission failed (status ' + res.status + ')';
+        try{
+          const data = await res.json();
+          if(data && data.errors && data.errors.length){
+            detail = data.errors.map(e2 => e2.message || JSON.stringify(e2)).join('; ');
+          }
+        } catch(parseErr){}
+        showCtMessage('Error: ' + detail, true);
+        ctBtn.textContent = ctBtnLabel;
       }
     } catch(err){
-      ctBtn.textContent = 'Error — try again';
-      setTimeout(()=>{ ctBtn.textContent = ctBtnLabel; }, 2200);
+      showCtMessage('Network error: ' + err.message + ' — the request may be getting blocked before it reaches Formspree.', true);
+      ctBtn.textContent = ctBtnLabel;
     }
     ctBtn.disabled = false;
     if(ctBtn.textContent === 'Sending...') ctBtn.textContent = ctBtnLabel;
