@@ -597,7 +597,7 @@ nav a.nav-active::after{width:100%;}
   <div class="nid">H·A // OPERATOR</div>
   <button class="nav-ham" id="navHam" aria-label="Menu"><span></span><span></span><span></span></button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#hero">Overview</a></li>
+    <li><a href="#hero" class="scroll-top-link">Overview</a></li>
     <li><a href="#championships">Awards</a></li>
     <li><a href="#intel-method">Intel</a></li>
     <li><a href="#cyber-ops">Cyber</a></li>
@@ -1098,7 +1098,7 @@ nav a.nav-active::after{width:100%;}
 </div>
 
 <footer>
-  <a href="#hero" class="foot-logo" aria-label="Hamza Ashraf — back to top">
+  <a href="#hero" class="foot-logo scroll-top-link" aria-label="Hamza Ashraf — back to top">
     <svg viewBox="215 308 310 310" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(0,920) scale(0.1,-0.1)">
       <path d="M3810 5413 c-151 -262 -283 -491 -293 -510 l-17 -33 209 0 210 0 83
@@ -1119,6 +1119,42 @@ l81 142 213 0 c117 0 213 -1 213 -3 0 -2 -88 -155 -195 -341 l-195 -337 104
 // FOOTER YEAR
 const fyEl = document.getElementById('fyear');
 if(fyEl) fyEl.textContent = new Date().getFullYear();
+
+// SCROLL-TO-TOP LINKS — scroll to hero without adding #hero to the URL
+document.querySelectorAll('.scroll-top-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('hero').scrollIntoView({behavior:'smooth'});
+    history.pushState(null, '', window.location.pathname + window.location.search);
+  });
+});
+
+// HASH VALIDATION — catch fake/typo'd #fragments that never hit the server
+function checkHash(){
+  const hash = window.location.hash;
+  if(!hash || hash.length < 2) return;
+  const id = hash.slice(1);
+  const target = document.getElementById(id);
+  const overlay = document.getElementById('hashError');
+  if(!target){
+    document.getElementById('hashErrorTarget').textContent = hash;
+    overlay.style.display = 'flex';
+    let count = 3;
+    const countEl = document.getElementById('hashErrorCount');
+    const tick = setInterval(() => {
+      count--;
+      countEl.textContent = count;
+      if(count <= 0){
+        clearInterval(tick);
+        overlay.style.display = 'none';
+        history.pushState(null, '', window.location.pathname + window.location.search);
+        document.getElementById('hero').scrollIntoView({behavior:'smooth'});
+      }
+    }, 1000);
+  }
+}
+window.addEventListener('hashchange', checkHash);
+window.addEventListener('load', checkHash);
 
 // FOOTER LOGO — brief glow on click/tap, then fades as it scrolls to top
 const footLogo = document.querySelector('.foot-logo');
@@ -1453,5 +1489,10 @@ if(ctForm){
   });
 }
 </script>
+<div id="hashError" style="display:none;position:fixed;inset:0;background:rgba(6,8,10,.96);z-index:10000;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;">
+  <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#D81E3C;letter-spacing:5px;margin-bottom:10px;">// ACCESS RESTRICTED</div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:#E0F0FA;letter-spacing:1px;">SECTION NOT FOUND</div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#4E7088;letter-spacing:1px;max-width:380px;line-height:1.8;margin-top:14px;">No section matches <span id="hashErrorTarget" style="color:#00C8F0;"></span><br>Redirecting to a valid location in <span id="hashErrorCount">3</span>s...</div>
+</div>
 </body>
 </html>
