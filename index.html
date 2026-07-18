@@ -392,6 +392,35 @@ h2{font-family:var(--head);font-size:clamp(32px,5vw,54px);color:var(--bright);le
 .svc-card:nth-child(2) .svc-list li::before{color:var(--purpleL);}
 .svc-card:nth-child(3) .svc-list li::before{color:var(--red);}
 
+/* ── SAMPLE BUTTON ────────────────────────────────────────── */
+.svc-sample-btn{display:inline-flex;align-items:center;gap:7px;margin-top:22px;border:1px solid var(--accent);color:var(--accent);background:transparent;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:9px 15px;cursor:pointer;transition:background .25s,color .25s;}
+.svc-sample-btn:hover{background:var(--accent);color:var(--bg);}
+.svc-card:nth-child(2) .svc-sample-btn{border-color:var(--purpleL);color:var(--purpleL);}
+.svc-card:nth-child(2) .svc-sample-btn:hover{background:var(--purpleL);color:var(--bg);}
+.svc-card:nth-child(3) .svc-sample-btn{border-color:var(--red);color:var(--red);}
+.svc-card:nth-child(3) .svc-sample-btn:hover{background:var(--red);color:var(--bg);}
+
+/* ── SAMPLE MODAL ─────────────────────────────────────────── */
+.svc-modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0);z-index:9000;align-items:center;justify-content:center;padding:24px;transition:background .2s ease;}
+.svc-modal-backdrop.open{display:flex;}
+.svc-modal-backdrop.show{background:rgba(0,0,0,.72);}
+.svc-modal{background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--accent);border-radius:2px;padding:34px 30px;max-width:460px;width:100%;max-height:85vh;overflow-y:auto;position:relative;opacity:0;transform:scale(.94) translateY(6px);transition:opacity .2s ease,transform .2s ease;}
+.svc-modal-backdrop.show .svc-modal{opacity:1;transform:scale(1) translateY(0);}
+.svc-modal[data-accent="purple"]{border-left-color:var(--purpleL);}
+.svc-modal[data-accent="red"]{border-left-color:var(--red);}
+.svc-modal-close{position:absolute;top:16px;right:18px;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;background:none;border:none;padding:4px;}
+.svc-modal-close:hover{color:var(--bright);}
+.svc-modal-tag{font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:3px;margin-bottom:10px;}
+.svc-modal[data-accent="purple"] .svc-modal-tag{color:var(--purpleL);}
+.svc-modal[data-accent="red"] .svc-modal-tag{color:var(--red);}
+.svc-modal-title{font-family:var(--head);font-size:24px;color:var(--bright);margin-bottom:20px;line-height:1.1;}
+.svc-modal-label{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:10px;margin-top:20px;}
+.svc-modal[data-accent="purple"] .svc-modal-label{color:var(--purpleL);}
+.svc-modal[data-accent="red"] .svc-modal-label{color:var(--red);}
+.svc-modal-label:first-of-type{margin-top:0;}
+.svc-modal-list{display:flex;flex-direction:column;gap:12px;}
+.svc-modal-list p{font-size:13px;color:var(--bright);line-height:1.65;}
+
 /* ── CONTACT FORM ─────────────────────────────────────────── */
 .ctf{display:flex;flex-direction:column;gap:17px;}
 .ctf-row{display:flex;flex-direction:column;gap:7px;}
@@ -1041,6 +1070,7 @@ nav a.nav-active::after{width:100%;}
         <li>Social media & metadata exposure review</li>
         <li>Prioritised remediation recommendations</li>
       </ul>
+      <button class="svc-sample-btn" data-modal="modal-exposure">View Sample</button>
     </div>
     <div class="svc-card fi">
       <div class="svc-code">02 // DUE DILIGENCE</div>
@@ -1052,6 +1082,7 @@ nav a.nav-active::after{width:100%;}
         <li>Digital footprint & affiliation mapping</li>
         <li>Risk summary with confidence ratings</li>
       </ul>
+      <button class="svc-sample-btn" data-modal="modal-diligence">View Sample</button>
     </div>
     <div class="svc-card fi">
       <div class="svc-code">03 // OFFENSIVE SEC</div>
@@ -1063,9 +1094,74 @@ nav a.nav-active::after{width:100%;}
         <li>Findings scored and ranked by severity</li>
         <li>Remediation-focused reporting</li>
       </ul>
+      <button class="svc-sample-btn" data-modal="modal-pentest">View Sample</button>
     </div>
   </div>
 </div>
+</div>
+
+<!-- SAMPLE MODALS -->
+<div class="svc-modal-backdrop" id="modal-exposure">
+  <div class="svc-modal" data-accent="cyan">
+    <button class="svc-modal-close" aria-label="Close">✕</button>
+    <div class="svc-modal-tag">SAMPLE DELIVERABLE</div>
+    <div class="svc-modal-title">Digital Exposure Report</div>
+    <div class="svc-modal-label">What You Receive</div>
+    <div class="svc-modal-list">
+      <p>A complete map of everywhere your name, photos, and personal details appear online — public records, search engines, social media, and the dark web.</p>
+      <p>Every exposed credential checked against known breach data, showing exactly which passwords and accounts are still at risk today.</p>
+      <p>A risk-ranked findings report, written in plain language — no jargon you need a security background to understand.</p>
+      <p>A step-by-step remediation plan naming the exact account, post, or listing to fix, in the order that reduces your risk fastest.</p>
+    </div>
+    <div class="svc-modal-label">Why It Matters</div>
+    <div class="svc-modal-list">
+      <p>You find out what's exposed before someone with worse intentions does.</p>
+      <p>You stop guessing where to start — the highest-risk exposures are identified and prioritised for you.</p>
+      <p>You walk away with a clear, actionable plan, not just a list of problems you're left to solve alone.</p>
+    </div>
+  </div>
+</div>
+
+<div class="svc-modal-backdrop" id="modal-diligence">
+  <div class="svc-modal" data-accent="purple">
+    <button class="svc-modal-close" aria-label="Close">✕</button>
+    <div class="svc-modal-tag">SAMPLE DELIVERABLE</div>
+    <div class="svc-modal-title">Partner & Vendor Due Diligence</div>
+    <div class="svc-modal-label">What You Receive</div>
+    <div class="svc-modal-list">
+      <p>Full verification of the entity's ownership structure and registration, confirming they are who they claim to be.</p>
+      <p>A reputational screening across adverse media, litigation, and regulatory records tied to the person or organisation.</p>
+      <p>A digital footprint and affiliation map, surfacing hidden connections to other entities or past disputes.</p>
+      <p>A risk summary with a confidence rating on every finding, so you know how reliable each one is, not just what it says.</p>
+    </div>
+    <div class="svc-modal-label">Why It Matters</div>
+    <div class="svc-modal-list">
+      <p>You sign knowing exactly who you're dealing with, not just who they claim to be.</p>
+      <p>You catch red flags before money or contracts change hands, not after.</p>
+      <p>You walk away with a defensible record of due diligence, should the relationship ever be questioned.</p>
+    </div>
+  </div>
+</div>
+
+<div class="svc-modal-backdrop" id="modal-pentest">
+  <div class="svc-modal" data-accent="red">
+    <button class="svc-modal-close" aria-label="Close">✕</button>
+    <div class="svc-modal-tag">SAMPLE DELIVERABLE</div>
+    <div class="svc-modal-title">Security Assessment & Penetration Testing</div>
+    <div class="svc-modal-label">What You Receive</div>
+    <div class="svc-modal-list">
+      <p>Hands-on testing of your applications, network, or infrastructure — not just an automated vulnerability scan.</p>
+      <p>Proof-of-concept evidence for every exploitable weakness found, so there's no ambiguity about whether it's real.</p>
+      <p>Findings scored and ranked by actual exploitability, not a generic checklist of theoretical risks.</p>
+      <p>A remediation-focused report your team can act on directly, with fixes explained in plain terms alongside the technical detail.</p>
+    </div>
+    <div class="svc-modal-label">Why It Matters</div>
+    <div class="svc-modal-list">
+      <p>You find the vulnerability before an attacker does, with proof it's real and worth fixing.</p>
+      <p>You stop spending resources chasing low-risk scanner noise and focus only on what's actually exploitable.</p>
+      <p>You walk away with a report that satisfies both your technical team and anyone asking for audit or compliance evidence.</p>
+    </div>
+  </div>
 </div>
 
 <!-- CONTACT-->
@@ -1149,6 +1245,32 @@ document.querySelectorAll('.scroll-top-link').forEach(link => {
     document.getElementById('hero').scrollIntoView({behavior:'smooth'});
     history.pushState(null, '', window.location.pathname + window.location.search);
   });
+});
+
+// SERVICE SAMPLE MODALS
+function openSvcModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add('open');
+  requestAnimationFrame(() => { el.classList.add('show'); });
+  document.body.style.overflow = 'hidden';
+}
+function closeSvcModal(el){
+  el.classList.remove('show');
+  document.body.style.overflow = '';
+  setTimeout(() => { el.classList.remove('open'); }, 200);
+}
+document.querySelectorAll('.svc-sample-btn').forEach(btn => {
+  btn.addEventListener('click', () => openSvcModal(btn.dataset.modal));
+});
+document.querySelectorAll('.svc-modal-backdrop').forEach(backdrop => {
+  backdrop.querySelector('.svc-modal-close').addEventListener('click', () => closeSvcModal(backdrop));
+  backdrop.addEventListener('click', (e) => { if(e.target === backdrop) closeSvcModal(backdrop); });
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.svc-modal-backdrop.open').forEach(closeSvcModal);
+  }
 });
 
 // HASH VALIDATION — catch fake/typo'd #fragments that never hit the server
